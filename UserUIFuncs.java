@@ -45,7 +45,7 @@ public class UserUIFuncs {
     }
 
     public static void showVersion() {
-        String ver = "v0.1.20";
+        String ver = "v0.1.30";
         String code = "Ares";
         System.out.printf("\n\tJClarx %s \"%s\" Beta", ver, code);
         System.out.printf("\n\t======================\n\n");
@@ -53,15 +53,15 @@ public class UserUIFuncs {
 
     /**
      * gets User-Input and returns it
-     * 
+     *
      * @param field Game-Feld
      * @param player The player who is now playing
-     * @return 
-     * 
+     * @return
+     *
      */
     public static boolean userInput(char field[][], char player) throws IOException, InterruptedException {
         GameLogic logic = new GameLogic();
-        LibraryFunctions lib = new LibraryFunctions();
+        LibFuncs lib = new LibFuncs();
         Scanner sc = new Scanner(System.in);
         Boolean done = false;
         char zeile;
@@ -76,15 +76,19 @@ public class UserUIFuncs {
                 zeile = GameLogic.extractZeile(s);
                 if (zeile == 0) {
                     printFehler("Die Zeile " + zeile + "gibt es nicht!");
+                    done = false; 
                 }
                 col = GameLogic.extractCol(s);
                 if (col == 0) {
                     printFehler("Die Spalte " + col + "gibt es nicht!");
+                    done = false;
                 } else {
                     retsetze = GameLogic.setPos(field, col, zeile, player);
                     if (retsetze == 0) {
                         printFehler("Diese Position gibt es nicht!");
                         done = false;
+                    } else if(retsetze == 2) {
+                        printFehler("Diese Position gibt es nicht!");
                     } else {
                         done = true;
                     }
@@ -107,6 +111,6 @@ public class UserUIFuncs {
      * @param fehler String, Where the message is
      */
     public static void printFehler(String fehler) {
-        System.out.println("Ein Fehler ist aufgetreten: " + fehler);
+        System.out.println("\tEin Fehler ist aufgetreten: " + fehler);
     }
 }

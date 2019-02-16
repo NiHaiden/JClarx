@@ -24,58 +24,53 @@ import java.io.IOException;
  * @author nikla
  */
 public class JClarx {
-
-    /**
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws IOException, InterruptedException {
-        int cols = 3;
+    
+    public static void main(String... args) throws IOException, InterruptedException {
+        LibFuncs.clearScr();
+        clarxMain();
+        
+    }
+    public static void clarxMain() throws IOException, InterruptedException {
+   
         char[][] field = new char[][]{
             {' ', ' ', ' '},
             {' ', ' ', ' '},
             {' ', ' ', ' '}
         };
-        LibraryFunctions lib = new LibraryFunctions();
-        UserUIFuncs ui = new UserUIFuncs();
-        GameLogic gl = new GameLogic();
+     
         int won = 0;
-        int xfertig = 0, ofertig = 0;
         char player = 0;
-        int fehlwert;
-        int retarn;
-        char dummy;
-        int unentcounter = 0;
         boolean xplayerdone = false;
         boolean oplayerdone = false;
-        String returninput;
 
         do {
             while (xplayerdone == false) {
-                lib.clearScr();  ///Clearing the console Window for better viewing experience
-                ui.showField(field);
+                LibFuncs.clearScr();  ///Clearing the console Window for better viewing experience
+                UserUIFuncs.showField(field);
                 //   won = 1;
                 player = 'X';
 
-                xplayerdone = ui.userInput(field, player);
-                if (gl.checkIfWon(field, player) == 1) {
+                xplayerdone = UserUIFuncs.userInput(field, player);
+                if (GameLogic.checkIfWon(field, player) == 1) {
+                    UserUIFuncs.showField(field);
                     System.out.println("Player " + player + " hat gewonnen! Glueckwunsch!");
                     return;
                 }
             }
-           
+
             while (oplayerdone == false) {
-                lib.clearScr();
-                ui.showField(field);
+                LibFuncs.clearScr();
+                UserUIFuncs.showField(field);
                 player = 'O';
-                oplayerdone = ui.userInput(field, player);
-                if (gl.checkIfWon(field, player) == 1) {
+                oplayerdone = UserUIFuncs.userInput(field, player);
+                if (GameLogic.checkIfWon(field, player) == 1) {
+                    UserUIFuncs.showField(field);
                     System.out.println("Player " + player + " hat gewonnen! Glueckwunsch!");
                     return;
                 }
             }
-             xplayerdone = false;
-             oplayerdone = false;
+            xplayerdone = false;
+            oplayerdone = false;
         } while (won != 1);
 
     }

@@ -23,9 +23,7 @@ package jclarx;
  * @author nikla
  */
 public class GameLogic {
-    
-    private static int col;
-    private static char zeile;
+
     /**
      *
      * @param field
@@ -38,6 +36,8 @@ public class GameLogic {
         int zeile = 0;
 
         switch (zwahl) {
+            default:
+                return 2;
             case 'a':
                 zeile = 0;
                 break;
@@ -51,14 +51,15 @@ public class GameLogic {
                 zeile = 1;
                 break;
             case 'c':
-                zeile = 2; 
-                break; 
+                zeile = 2;
+                break;
             case 'C':
                 zeile = 2;
                 break;
-            default:
-                return 2;
+
         }
+        
+      //  System.out.println("DEBUG: " + zeile);
 
         if (colwahl > 3) {
             return 2;
@@ -113,43 +114,41 @@ public class GameLogic {
         if (s.indexOf('A') == 0) {
             return 'A';
         }
+        
+        if(s.indexOf('a') == 0) {
+            return 'a';
+        }
 
         if (s.indexOf('B') == 0) {
             return 'B';
+        }
+        
+        if(s.indexOf('b') == 0) {
+            return 'b';
         }
 
         if (s.indexOf('C') == 0) {
             return 'C';
         }
+        
+        if(s.indexOf('c') == 0) {
+            return 'c';
+        }
         return 0;
     }
-    
-    public static int extractCol(String s){
-        if(s.indexOf('1') == 2){
+
+    public static int extractCol(String s) {
+        if (s.indexOf('1') == 2) {
             return 1;
         }
-        if (s.indexOf('2')==2) {
+        if (s.indexOf('2') == 2) {
             return 2;
         }
-        
-        if (s.indexOf('3')==2) {
+
+        if (s.indexOf('3') == 2) {
             return 3;
         }
         return 0;
     }
-    /**
-     * 
-     * @param c The char to be set
-     */
-    public static void setZeile(char c){
-        zeile = c;
-    }
-    
-    /**
-     * 
-     * @param z The Zeile to be set 
-     */
-    public static void setCol(int z){
-        col = z;
-    }
+
 }
